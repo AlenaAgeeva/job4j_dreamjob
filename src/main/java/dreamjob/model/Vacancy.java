@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Vacancy {
     private int id;
-
     private String title;
 
     public Vacancy(int id, String title) {
