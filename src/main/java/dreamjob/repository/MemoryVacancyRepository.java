@@ -2,7 +2,6 @@ package dreamjob.repository;
 
 import dreamjob.model.Vacancy;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +16,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "text", LocalDateTime.now()));
-        save(new Vacancy(1, "Junior Java Developer", "text", LocalDateTime.now()));
-        save(new Vacancy(2, "Junior+ Java Developer", "text", LocalDateTime.now()));
-        save(new Vacancy(3, "Middle Java Developer", "text", LocalDateTime.now()));
-        save(new Vacancy(4, "Middle+ Java Developer", "text", LocalDateTime.now()));
-        save(new Vacancy(5, "Senior Java Developer", "text", LocalDateTime.now()));
+        save(new Vacancy(0, "Intern Java Developer", "text"));
+        save(new Vacancy(1, "Junior Java Developer", "text"));
+        save(new Vacancy(2, "Junior+ Java Developer", "text"));
+        save(new Vacancy(3, "Middle Java Developer", "text"));
+        save(new Vacancy(4, "Middle+ Java Developer", "text"));
+        save(new Vacancy(5, "Senior Java Developer", "text"));
     }
 
     public static MemoryVacancyRepository getInstance() {
