@@ -1,6 +1,7 @@
 package dreamjob.repository;
 
 import dreamjob.model.Candidate;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -8,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class MemoryCandidateRepository implements CandidateRepository {
-
-    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
 
     private int nextId = 1;
 
@@ -27,10 +27,6 @@ public class MemoryCandidateRepository implements CandidateRepository {
                 LocalDateTime.of(2024, 8, 29, 20, 15)));
         save(new Candidate(4, "Anton Antonov", "text",
                 LocalDateTime.of(2023, 9, 23, 7, 34)));
-    }
-
-    public static MemoryCandidateRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override

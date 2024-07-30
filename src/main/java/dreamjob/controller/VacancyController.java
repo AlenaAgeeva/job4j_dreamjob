@@ -1,7 +1,6 @@
 package dreamjob.controller;
 
 import dreamjob.model.Vacancy;
-import dreamjob.service.SimpleVacancyService;
 import dreamjob.service.VacancyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/vacancies")
 public class VacancyController {
 
-    private final VacancyService vacancyService = SimpleVacancyService.getInstance();
+    private final VacancyService vacancyService;
+
+    public VacancyController(VacancyService vacancyService) {
+        this.vacancyService = vacancyService;
+    }
 
     @GetMapping
     public String getAll(Model model) {

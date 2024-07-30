@@ -2,7 +2,6 @@ package dreamjob.controller;
 
 import dreamjob.model.Candidate;
 import dreamjob.service.CandidateService;
-import dreamjob.service.SimpleCandidateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/candidates")
 public class CandidateController {
 
-    private final CandidateService candidateService = SimpleCandidateService.getInstance();
+    private final CandidateService candidateService;
+
+    public CandidateController(CandidateService candidateService) {
+        this.candidateService = candidateService;
+    }
 
     @GetMapping
     public String getAll(Model model) {
