@@ -4,6 +4,7 @@ import dreamjob.model.Vacancy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,12 +20,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final ConcurrentMap<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "text"));
-        save(new Vacancy(1, "Junior Java Developer", "text"));
-        save(new Vacancy(2, "Junior+ Java Developer", "text"));
-        save(new Vacancy(3, "Middle Java Developer", "text"));
-        save(new Vacancy(4, "Middle+ Java Developer", "text"));
-        save(new Vacancy(5, "Senior Java Developer", "text"));
+        save(new Vacancy(0, "Intern Java Developer", "text", LocalDateTime.now(), true));
+        save(new Vacancy(1, "Junior Java Developer", "text", LocalDateTime.now(), true));
+        save(new Vacancy(2, "Junior+ Java Developer", "text", LocalDateTime.now(), true));
+        save(new Vacancy(3, "Middle Java Developer", "text", LocalDateTime.now(), true));
+        save(new Vacancy(4, "Middle+ Java Developer", "text", LocalDateTime.now(), true));
+        save(new Vacancy(5, "Senior Java Developer", "text", LocalDateTime.now(), true));
     }
 
     @Override
@@ -45,7 +46,8 @@ public class MemoryVacancyRepository implements VacancyRepository {
                 (id, oldVacancy) -> new Vacancy(oldVacancy.getId(),
                         vacancy.getTitle(),
                         vacancy.getDescription(),
-                        vacancy.getCreationDate())) != null;
+                        vacancy.getCreationDate(),
+                        vacancy.getVisible())) != null;
     }
 
     @Override
