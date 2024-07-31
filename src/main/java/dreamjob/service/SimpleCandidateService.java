@@ -2,12 +2,14 @@ package dreamjob.service;
 
 import dreamjob.model.Candidate;
 import dreamjob.repository.CandidateRepository;
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @Service
+@ThreadSafe
 public class SimpleCandidateService implements CandidateService {
 
     private final CandidateRepository candidateRepository;
