@@ -14,22 +14,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 @ThreadSafe
 public class MemoryCandidateRepository implements CandidateRepository {
-
     private final AtomicInteger nextId = new AtomicInteger(1);
-
     private final ConcurrentMap<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
         save(new Candidate(0, "Ivan Ivanov", "text",
-                LocalDateTime.of(2022, 2, 13, 3, 45)));
+                LocalDateTime.of(2022, 2, 13, 3, 45), 1));
         save(new Candidate(1, "Sidor Sidorov", "text",
-                LocalDateTime.of(2023, 4, 7, 10, 56)));
+                LocalDateTime.of(2023, 4, 7, 10, 56), 1));
         save(new Candidate(2, "Pert Petrov", "text",
-                LocalDateTime.of(2024, 10, 3, 15, 23)));
+                LocalDateTime.of(2024, 10, 3, 15, 23), 1));
         save(new Candidate(3, "Semen Semenov", "text",
-                LocalDateTime.of(2024, 8, 29, 20, 15)));
+                LocalDateTime.of(2024, 8, 29, 20, 15), 1));
         save(new Candidate(4, "Anton Antonov", "text",
-                LocalDateTime.of(2023, 9, 23, 7, 34)));
+                LocalDateTime.of(2023, 9, 23, 7, 34), 1));
     }
 
     @Override
@@ -51,7 +49,8 @@ public class MemoryCandidateRepository implements CandidateRepository {
                         new Candidate(oldCandidate.getId(),
                                 candidate.getName(),
                                 candidate.getDescription(),
-                                candidate.getCreationDate())) != null;
+                                candidate.getCreationDate(),
+                                candidate.getCityId())) != null;
     }
 
     @Override

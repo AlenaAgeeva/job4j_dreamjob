@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 @ThreadSafe
 public class SimpleVacancyService implements VacancyService {
-
     private final VacancyRepository vacancyRepository;
 
     public SimpleVacancyService(VacancyRepository vacancyRepository) {

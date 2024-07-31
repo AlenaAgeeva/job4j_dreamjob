@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 @ThreadSafe
 public class SimpleCandidateService implements CandidateService {
-
     private final CandidateRepository candidateRepository;
 
     public SimpleCandidateService(CandidateRepository candidateRepository) {

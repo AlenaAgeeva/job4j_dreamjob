@@ -14,18 +14,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 @ThreadSafe
 public class MemoryVacancyRepository implements VacancyRepository {
-
     private final AtomicInteger nextId = new AtomicInteger(1);
-
     private final ConcurrentMap<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "text", LocalDateTime.now(), true));
-        save(new Vacancy(1, "Junior Java Developer", "text", LocalDateTime.now(), true));
-        save(new Vacancy(2, "Junior+ Java Developer", "text", LocalDateTime.now(), true));
-        save(new Vacancy(3, "Middle Java Developer", "text", LocalDateTime.now(), true));
-        save(new Vacancy(4, "Middle+ Java Developer", "text", LocalDateTime.now(), true));
-        save(new Vacancy(5, "Senior Java Developer", "text", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Intern Java Developer", "text", LocalDateTime.now(), true, 1));
+        save(new Vacancy(1, "Junior Java Developer", "text", LocalDateTime.now(), true, 1));
+        save(new Vacancy(2, "Junior+ Java Developer", "text", LocalDateTime.now(), true, 1));
+        save(new Vacancy(3, "Middle Java Developer", "text", LocalDateTime.now(), true, 1));
+        save(new Vacancy(4, "Middle+ Java Developer", "text", LocalDateTime.now(), true, 1));
+        save(new Vacancy(5, "Senior Java Developer", "text", LocalDateTime.now(), true, 1));
     }
 
     @Override
@@ -47,7 +45,8 @@ public class MemoryVacancyRepository implements VacancyRepository {
                         vacancy.getTitle(),
                         vacancy.getDescription(),
                         vacancy.getCreationDate(),
-                        vacancy.getVisible())) != null;
+                        vacancy.getVisible(),
+                        vacancy.getCityId())) != null;
     }
 
     @Override
