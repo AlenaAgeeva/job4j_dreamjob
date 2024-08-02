@@ -6,24 +6,24 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 @ThreadSafe
 public class MemoryVacancyRepository implements VacancyRepository {
     private final AtomicInteger nextId = new AtomicInteger(1);
-    private final ConcurrentMap<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
+    private final Map<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "text", LocalDateTime.now(), true, 1));
-        save(new Vacancy(1, "Junior Java Developer", "text", LocalDateTime.now(), true, 1));
-        save(new Vacancy(2, "Junior+ Java Developer", "text", LocalDateTime.now(), true, 1));
-        save(new Vacancy(3, "Middle Java Developer", "text", LocalDateTime.now(), true, 1));
-        save(new Vacancy(4, "Middle+ Java Developer", "text", LocalDateTime.now(), true, 1));
-        save(new Vacancy(5, "Senior Java Developer", "text", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Intern Java Developer", "text", LocalDateTime.now(), true, 1,0));
+        save(new Vacancy(1, "Junior Java Developer", "text", LocalDateTime.now(), true, 1,0));
+        save(new Vacancy(2, "Junior+ Java Developer", "text", LocalDateTime.now(), true, 1,0));
+        save(new Vacancy(3, "Middle Java Developer", "text", LocalDateTime.now(), true, 1,0));
+        save(new Vacancy(4, "Middle+ Java Developer", "text", LocalDateTime.now(), true, 1,0));
+        save(new Vacancy(5, "Senior Java Developer", "text", LocalDateTime.now(), true, 1,0));
     }
 
     @Override
@@ -46,7 +46,8 @@ public class MemoryVacancyRepository implements VacancyRepository {
                         vacancy.getDescription(),
                         vacancy.getCreationDate(),
                         vacancy.getVisible(),
-                        vacancy.getCityId())) != null;
+                        vacancy.getCityId(),
+                        vacancy.getFileId())) != null;
     }
 
     @Override
