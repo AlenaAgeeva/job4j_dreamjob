@@ -5,13 +5,13 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @Repository
 @ThreadSafe
 public class MemoryCityRepository implements CityRepository {
-    private final ConcurrentMap<Integer, City> cities = new ConcurrentHashMap<>() {
+    private final Map<Integer, City> cities = new ConcurrentHashMap<>() {
         {
             put(1, new City(1, "Москва"));
             put(2, new City(2, "Санкт-Петербург"));
