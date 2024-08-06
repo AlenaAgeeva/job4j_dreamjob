@@ -2,7 +2,6 @@ package dreamjob.repository;
 
 import dreamjob.model.Vacancy;
 import org.springframework.stereotype.Repository;
-import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.Collection;
