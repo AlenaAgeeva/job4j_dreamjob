@@ -9,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("/vacancies")
 public class VacancyController {
@@ -23,23 +21,20 @@ public class VacancyController {
     }
 
     @GetMapping
-    public String getAll(Model model, HttpSession session) {
-        UserController.checkUser(model, session);
+    public String getAll(Model model) {
         model.addAttribute("vacancies", vacancyService.findAll());
         return "vacancies/list";
     }
 
     @GetMapping("/create")
-    public String getCreationPage(Model model, HttpSession session) {
-        UserController.checkUser(model, session);
+    public String getCreationPage(Model model) {
         model.addAttribute("cities", cityService.findAll());
         return "vacancies/create";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model, HttpSession session) {
+    public String create(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model) {
         try {
-            UserController.checkUser(model, session);
             vacancyService.save(vacancy, new FileDto(file.getOriginalFilename(), file.getBytes()));
             return "redirect:/vacancies";
         } catch (Exception exception) {
@@ -49,8 +44,7 @@ public class VacancyController {
     }
 
     @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable int id, HttpSession session) {
-        UserController.checkUser(model, session);
+    public String getById(Model model, @PathVariable int id) {
         var vacancyOptional = vacancyService.findById(id);
         if (vacancyOptional.isEmpty()) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
@@ -62,9 +56,8 @@ public class VacancyController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model, HttpSession session) {
+    public String update(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model) {
         try {
-            UserController.checkUser(model, session);
             var isUpdated = vacancyService.update(vacancy, new FileDto(file.getOriginalFilename(), file.getBytes()));
             if (!isUpdated) {
                 model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
@@ -78,9 +71,8 @@ public class VacancyController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable int id, HttpSession session) {
+    public String delete(Model model, @PathVariable int id) {
         if (!vacancyService.deleteById(id)) {
-            UserController.checkUser(model, session);
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
             return "errors/404";
         }
