@@ -18,15 +18,15 @@ public class MemoryCandidateRepository implements CandidateRepository {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
-        save(new Candidate(0, "Ivan Ivanov", "text",
+        save(new Candidate(0, "Ivan Ivanov", "sometext",
                 LocalDateTime.of(2022, 2, 13, 3, 45), 1, 0));
-        save(new Candidate(1, "Sidor Sidorov", "text",
+        save(new Candidate(1, "Sidor Sidorov", "sometext",
                 LocalDateTime.of(2023, 4, 7, 10, 56), 1, 0));
-        save(new Candidate(2, "Pert Petrov", "text",
+        save(new Candidate(2, "Pert Petrov", "sometext",
                 LocalDateTime.of(2024, 10, 3, 15, 23), 1, 0));
-        save(new Candidate(3, "Semen Semenov", "text",
+        save(new Candidate(3, "Semen Semenov", "sometext",
                 LocalDateTime.of(2024, 8, 29, 20, 15), 1, 0));
-        save(new Candidate(4, "Anton Antonov", "text",
+        save(new Candidate(4, "Anton Antonov", "sometext",
                 LocalDateTime.of(2023, 9, 23, 7, 34), 1, 0));
     }
 
