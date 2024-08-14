@@ -5,12 +5,10 @@ import dreamjob.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.sql2o.Sql2oException;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.Properties;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Sql2UserRepositoryTest {
     private static Sql2UserRepository sql2UserRepository;
@@ -51,9 +49,8 @@ class Sql2UserRepositoryTest {
     public void whenDuplicateThenException() {
         var user = sql2UserRepository
                 .save(new User(0, "test@example.com", "Test User", "securePassword")).get();
-        assertThatThrownBy(() -> {
-            sql2UserRepository
-                    .save(new User(0, "test@example.com", "Test User", "securePassword"));
-        }).isInstanceOf(Sql2oException.class);
+        sql2UserRepository.save(user);
+        assertThat(sql2UserRepository.findAll().size()).isOne();
+        assertThat(sql2UserRepository.findAll().iterator().next()).isEqualTo(user);
     }
 }

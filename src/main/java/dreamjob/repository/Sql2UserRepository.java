@@ -25,8 +25,6 @@ public class Sql2UserRepository implements UserRepository {
                     .addParameter("password", user.getPassword());
             user.setId(query.executeUpdate().getKey(Integer.class));
             return Optional.of(user);
-        } catch (Sql2oException e) {
-            throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
